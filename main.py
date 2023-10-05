@@ -52,15 +52,18 @@ while True:
         if second_select == "homeroom teacher":
             homeroom_first_last = input("Write in your first and last name: ")
             homeroom_lead = input("What classes are you gonna lead: ")
-            new_homeroom_teacher = Homeroom(homeroom_lead=homeroom_lead,homeroom_first_last=homeroom_first_last)
+            new_homeroom_teacher = Homeroom(homeroom_lead=homeroom_lead, homeroom_first_last=homeroom_first_last)
             homeroom_teachers.append(new_homeroom_teacher)
 
     elif first_select == "manage":
         third_select = input("Select what you want to manage: student/teacher/homeroom teacher/class/end: ")
         if third_select == "class":
             classes = input("Enter the class to display: ")
-            print(f"class {students_library}")
-            print(f"Homeroom teacher: {homeroom_teachers}")
+            for student in students_library:
+                if student.classes == classes:
+                    for homeroom in homeroom_teachers:
+                        if homeroom.homeroom_lead == homeroom_teachers:
+                            print(homeroom.homeroom_first_last, student.classes)
         else:
             print(f"Class {classes} not found.")
 
@@ -70,7 +73,7 @@ while True:
                 if student.first_lastname == first_lastname:
                     for teacher in teachers_library:
                         if student.classes in teacher.classes_taught:
-                            print(teacher.subject, teacher.teacher_first_lastname)
+                            print(teacher.subject, teacher.teacher_first_lastname, student.classes)
 
         if third_select == "teacher":
             teacher_first_lastname = input("Enter the teachers first and lastname: ")
