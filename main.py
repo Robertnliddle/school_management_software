@@ -21,7 +21,6 @@ teachers_library = []
 homeroom_teachers = []
 students_library = []
 classes = []
-classes_taught = []
 
 
 while True:
@@ -40,9 +39,12 @@ while True:
         if second_select == "teacher":
             teacher_first_lastname = input("Write in your first and last name: ")
             subject = input("What subject are you gonna teach: ")
-            classes_taught = input("How many classes have you taught (Leave blank to finish): ")
-            if not classes_taught:
-                break
+            classes_taught = []
+            while True:
+                classes_teacher_taught = input("How many classes have you taught (Leave blank to finish): ")
+                if not classes_teacher_taught:
+                    break
+                classes_taught.append(classes_teacher_taught)
             new_teacher = Teacher(teacher_first_lastname=teacher_first_lastname, subject=subject,
                                   classes_taught=classes_taught)
             teachers_library.append(new_teacher)
@@ -64,28 +66,30 @@ while True:
 
         if third_select == "student":
             first_lastname = input("Enter the students first and lastname: ")
-            print(students_library, "teacher_first_lastname")
-            print(f"Classes: {classes}")
+            for student in students_library:
+                if student.first_lastname == first_lastname:
+                    for teacher in teachers_library:
+                        if student.classes in teacher.classes_taught:
+                            print(teacher.subject, teacher.teacher_first_lastname)
 
         if third_select == "teacher":
             teacher_first_lastname = input("Enter the teachers first and lastname: ")
-            for teacher_first_lastname in teachers_library:
+            for teacher in teachers_library:
                 if teacher_first_lastname == teacher_first_lastname:
-            print(f"Teacher: {teacher_first_lastname}")
-            print(f"Classes taught: {classes_taught}")
+                    print(f"Teacher: {teacher_first_lastname}")
+                    print(f"Classes taught: {teacher.classes_taught}")
         else:
             print("Teacher not found in the system.")
 
         if third_select == "homeroom teacher":
             homeroom_first_last = input("Enter the homeroom teachers first and lastname: ")
-            for student in students_library:
-                if student == homeroom_teachers:
-
-            print(f"Homeroom teachers:{homeroom_teachers}")
-            print(f"Classes they lead: {classes}")
-            print(f"Students that are in those classes: {students_library}")
+            for homeroom in homeroom_teachers:
+                if homeroom.homeroom_first_last == homeroom_first_last:
+                    for student in students_library:
+                        if student.classes == homeroom.homeroom_lead:
+                            print(student.first_lastname)
         else:
-                print(f"Homeroom teacher {homeroom_teachers} not found in the system.")
+            print(f"Homeroom teacher {homeroom_teachers} not found in the system.")
 
         if third_select == "end":
             print("Exiting the program...")
