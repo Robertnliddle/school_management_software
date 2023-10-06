@@ -64,8 +64,8 @@ while True:
                     for homeroom in homeroom_teachers:
                         if homeroom.homeroom_lead == homeroom_teachers:
                             print(homeroom.homeroom_first_last, student.classes)
-        else:
-            print(f"Class {classes} not found.")
+                            if classes not in student.classes:
+                                print(f"Class {classes} not found")
 
         if third_select == "student":
             first_lastname = input("Enter the students first and lastname: ")
@@ -74,6 +74,8 @@ while True:
                     for teacher in teachers_library:
                         if student.classes in teacher.classes_taught:
                             print(teacher.subject, teacher.teacher_first_lastname, student.classes)
+        else: 
+            print("The student you are looking for are not in the system")
 
         if third_select == "teacher":
             teacher_first_lastname = input("Enter the teachers first and lastname: ")
